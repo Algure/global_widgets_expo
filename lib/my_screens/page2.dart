@@ -10,6 +10,8 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,9 +25,8 @@ class _Page2State extends State<Page2> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Text(
-                'This is another page to confirm overlay is consistent across screens',
+                'This is another page to confirm that overlay is consistent across screens',
               ),
-
             ],
           ),
         ),
@@ -38,7 +39,6 @@ class _Page2State extends State<Page2> {
     );
   }
 
-  void _showOverlay() {
-    MyOverlayWidget.setTimedNotifierValue(true);
-  }
+  void _showOverlay() => MyOverlayWidget.setTimedNotifierValue(true);
+
 }

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:global_widgets_expo/my_screens/page2.dart';
 import 'package:global_widgets_expo/my_widgets/my_overlay_widget.dart';
 import 'package:global_widgets_expo/my_widgets/my_progress_indicator.dart';
 
@@ -40,7 +41,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 '$_counter',
                 style: Theme.of(context).textTheme.headline4,
               ),
-
+              FloatingActionButton(
+                onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>Page2())),
+                tooltip: 'Next page',
+                child: const Icon(Icons.navigate_next),
+              ), // This trail
             ],
           ),
         ),

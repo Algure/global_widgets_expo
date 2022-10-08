@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+
 class MyOverlayWidget extends StatefulWidget {
   final Widget child;
 
@@ -25,7 +26,6 @@ class MyOverlayWidget extends StatefulWidget {
     });
   }
 
-
   @override
   State<MyOverlayWidget> createState() => _MyOverlayWidgetState();
 }
@@ -33,29 +33,46 @@ class MyOverlayWidget extends StatefulWidget {
 class _MyOverlayWidgetState extends State<MyOverlayWidget> {
 
 
+
   @override
   Widget build(BuildContext context) {
-    return Overlay(
-      initialEntries: [
-        OverlayEntry(builder: (context){
-          return widget.child;
-        }),
 
-        if(MyOverlayWidget.notifier.value)
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Overlay(
+        initialEntries: [
           OverlayEntry(builder: (context){
-            return Container( // Shrouding layout to prevent user interactions
-              color: Colors.black.withOpacity(0.5),
-              alignment: Alignment.center,
-              child: Container(
-                height: 100,
-                width: 100,
-                child: CircularProgressIndicator(),
-              ),
-            );
+            return widget.child;
           }),
 
-      ],
+          if(MyOverlayWidget.notifier.value)
+            OverlayEntry(builder: (context){
+                return Container( // Shrouding layout to prevent user interactions
+                  color: Colors.black.withOpacity(0.5),
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: 100,
+                    width: 100,
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+            ),
+        ],
+      ),
     );
+  }
+
+  @override
+  void initState() {
+    MyOverlayWidget.notifier.addListener(_rebuildByNotifier);
+  }
+
+  void _rebuildByNotifier() {
+    print('MyOverlayWidget.notifier.value: ${MyOverlayWidget.notifier.value}');
+    setState(() {
+
+    });
   }
 }
 
